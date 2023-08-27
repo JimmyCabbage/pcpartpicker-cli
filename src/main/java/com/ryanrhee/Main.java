@@ -13,6 +13,10 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Path csvPath = Paths.get("pcspecs.csv");
+        ArrayList<PcPart> pcParts = readPcParts(csvPath);
+    }
+
+    private static  ArrayList<PcPart> readPcParts(Path csvPath) {
         List<String[]> lines = readCsvFile(csvPath); //read the csv file into a list of values
 
         PcPartFactory partFactory = new PcPartFactory();
@@ -24,9 +28,11 @@ public class Main {
             PcPart part = partFactory.getPart(line);
             parts.add(part);
         }
+
+        return parts;
     }
 
-    public static List<String[]> readCsvFile(Path csvPath) {
+    private static List<String[]> readCsvFile(Path csvPath) {
         try (Reader fileReader = Files.newBufferedReader(csvPath)) {
             try (CSVReader csvReader = new CSVReader(fileReader)) {
                 return csvReader.readAll();
