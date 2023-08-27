@@ -1,6 +1,10 @@
 package com.ryanrhee;
 
 import com.opencsv.CSVReader;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -10,13 +14,23 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+@Command(name = "pcpartpicker-cli", mixinStandardHelpOptions = true, version = "pcpartpicker-cli 0.1")
+public class Main implements Runnable {
     public static void main(String[] args) {
-        Path csvPath = Paths.get("pcspecs.csv");
+        int exitCode = new CommandLine(new Main()).execute(args);
+        System.exit(exitCode);
+    }
+
+    @Option(names = { "-c", "--csv" }, description = "Set the CSV file that this program reads PC Parts from.")
+    String csvFilename = "pcspecs.csv";
+
+    @Override
+    public void run() {
+        Path csvPath = Paths.get(csvFilename);
         ArrayList<PcPart> pcParts = readPcParts(csvPath);
     }
 
-    private static  ArrayList<PcPart> readPcParts(Path csvPath) {
+    private ArrayList<PcPart> readPcParts(Path csvPath) {
         List<String[]> lines = readCsvFile(csvPath); //read the csv file into a list of values
 
         PcPartFactory partFactory = new PcPartFactory();
@@ -32,7 +46,7 @@ public class Main {
         return parts;
     }
 
-    private static List<String[]> readCsvFile(Path csvPath) {
+    private List<String[]> readCsvFile(Path csvPath) {
         try (Reader fileReader = Files.newBufferedReader(csvPath)) {
             try (CSVReader csvReader = new CSVReader(fileReader)) {
                 return csvReader.readAll();
