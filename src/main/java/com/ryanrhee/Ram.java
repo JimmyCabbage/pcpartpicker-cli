@@ -26,7 +26,7 @@ class Ram extends PcPart {
         return gbSize;
     }
 
-    public int getSize() {
+    public int getSpeed() {
         return speed;
     }
 }
