@@ -128,7 +128,7 @@ public class Main implements Runnable {
     private boolean getUserSmallPreference() {
         boolean smallPreference;
 
-        System.out.printf("Do you prefer a small computer (y/n)?: ");
+        System.out.print("Do you prefer a small computer (y/n)?: ");
 
         Scanner inScanner = new Scanner(System.in);
         smallPreference = inScanner.next().equalsIgnoreCase("Y");
@@ -160,7 +160,7 @@ public class Main implements Runnable {
     private boolean getUserFastFileSpeed() {
         boolean fastFileSpeed;
 
-        System.out.printf("Do you need fast file access speed (y/n)?: ");
+        System.out.print("Do you need fast file access speed (y/n)?: ");
 
         Scanner inScanner = new Scanner(System.in);
         fastFileSpeed = inScanner.next().equalsIgnoreCase("Y");
