@@ -41,6 +41,12 @@ public class Main implements Runnable {
                                                           userSmallPreference, userStorageSpace,
                                                           userFastFileSpeed);
 
+        //we couldn't find a combo of parts that matched the given requirements
+        if (chosenParts == null) {
+            System.out.println("Couldn't build a PC that met the given requirements!");
+            System.exit(2);
+        }
+
         //print out the parts we chose
         printOutPartType(chosenParts, PcPartType.CPU);
         printOutPartType(chosenParts, PcPartType.MOTHERBOARD);
@@ -49,6 +55,8 @@ public class Main implements Runnable {
         printOutPartType(chosenParts, PcPartType.RAM);
         printOutPartType(chosenParts, PcPartType.CASE);
         printOutPartType(chosenParts, PcPartType.STORAGE);
+
+        System.exit(0);
     }
 
     private List<PcPart> readPcParts(Path csvPath) {
