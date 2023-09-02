@@ -58,6 +58,13 @@ public class Main implements Runnable {
         printOutPartType(chosenParts, PcPartType.CASE);
         printOutPartType(chosenParts, PcPartType.STORAGE);
 
+        int price = 0;
+        for (PcPart part : chosenParts) {
+            price += part.getPrice();
+        }
+
+        System.out.printf("\nTotal Price: $%d\n", price);
+
         System.exit(0);
     }
 
@@ -184,7 +191,7 @@ public class Main implements Runnable {
                 .toList();
 
         for (PcPart part : filteredParts) {
-            System.out.printf("%s: %s\n", partType.toString(), part.getName());
+            System.out.printf("%-12s: %s\n", partType.toString(), part.getName());
         }
     }
 }
