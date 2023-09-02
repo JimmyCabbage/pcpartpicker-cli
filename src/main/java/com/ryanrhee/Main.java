@@ -47,6 +47,8 @@ public class Main implements Runnable {
             System.exit(2);
         }
 
+        System.out.print("\nChosen Parts:\n==========================\n");
+
         //print out the parts we chose
         printOutPartType(chosenParts, PcPartType.CPU);
         printOutPartType(chosenParts, PcPartType.MOTHERBOARD);
