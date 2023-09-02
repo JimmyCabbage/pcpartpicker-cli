@@ -76,8 +76,7 @@ class PcPartPicker {
                 }
 
                 List<PcPart> possibleStorages = storages.stream().filter(s -> s.getPrice() <= budget)
-                        .filter(s -> ((Storage)s).getGbSize() >= storageSpace)
-                        .filter(s -> !fastFileSpeed || !(((Storage) s).getStorageType() == StorageType.HDD))
+                        .filter(s -> checkStorage((Storage)s, storageSpace, fastFileSpeed))
                         .sorted(Comparator.comparing(s -> rankStorage((Storage)s, fastFileSpeed)).reversed())
                         .toList();
                 for (PcPart storage : possibleStorages) {
@@ -180,6 +179,18 @@ class PcPartPicker {
         }
 
         return rank;
+    }
+
+    private boolean checkStorage(Storage storage, int storageSpace, boolean fastFileSpeed) {
+        if (storage.getGbSize() < storageSpace) {
+            return false;
+        }
+
+        if (fastFileSpeed && storage.getStorageType() == StorageType.HDD) {
+            return false;
+        }
+
+        return true;
     }
 
     private int rankCase(Case pcCase, boolean smallPreference) {
