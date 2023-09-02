@@ -170,7 +170,7 @@ public class Main implements Runnable {
 
     private void printOutPartType(List<PcPart> parts, PcPartType partType) {
         List<PcPart> filteredParts = parts.stream()
-                .filter(p -> p.getType() != partType)
+                .filter(p -> p.getType() == partType)
                 .toList();
 
         for (PcPart part : filteredParts) {
