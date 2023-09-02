@@ -152,7 +152,7 @@ public class Main implements Runnable {
 
                 Scanner inScanner = new Scanner(System.in);
                 storageSpace = inScanner.nextInt();
-                if (storageSpace <= 150) {
+                if (storageSpace < 150) {
                     throw new IllegalArgumentException("The computer requires at least 150 GBs of space");
                 }
 
